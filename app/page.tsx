@@ -214,10 +214,10 @@ export default function ProjectPage() {
             Neural Fields and Neural Radiance Fields Project
           </h1>
           <p className="text-sm text-muted-foreground">
-            <strong>Author:</strong> [Your Name]
+            <strong>Author:</strong> Brian Le
           </p>
           <p className="text-sm text-muted-foreground">
-            <strong>Published:</strong> [Date]
+            <strong>Published:</strong> Nov 13, 2025
           </p>
 
           <div className="mt-8">

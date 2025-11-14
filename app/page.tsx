@@ -241,7 +241,7 @@ export default function ProjectPage() {
             Part 0: Camera Calibration and 3D Scanning
           </h2>
 
-          <h3
+          {/* <h3
             id="part0-background"
             className="mb-5 mt-10 text-2xl font-semibold text-foreground"
           >
@@ -253,9 +253,39 @@ export default function ProjectPage() {
               intrinsic and extrinsic parameters, and the importance of accurate
               calibration for 3D reconstruction.
             </p>
+          </div> */}
+          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-8">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {[
+                {
+                  src: "part0_img1.png",
+                  caption: "Calibration setup photo",
+                },
+                {
+                  src: "part0_img2.png",
+                  caption: "Sample checkerboard detection result",
+                },
+              ].map(({ src, caption }) => (
+                <figure
+                  key={src}
+                  className="rounded-md border border-border/70 bg-background p-3 shadow-sm"
+                >
+                  <Image
+                    src={src}
+                    alt={caption}
+                    width={600}
+                    height={400}
+                    className="mx-auto h-auto w-full rounded"
+                  />
+                  <figcaption className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">
+                    {caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
 
-          <h3
+          {/* <h3
             id="part0-pipeline"
             className="mb-5 mt-10 text-2xl font-semibold text-foreground"
           >
@@ -321,7 +351,7 @@ export default function ProjectPage() {
               Content will be added here: Description of how the calibrated
               dataset is organized and packaged for downstream tasks.
             </p>
-          </div>
+          </div> */}
         </section>
 
         {/* Part 1: Fit a Neural Field to a 2D Image */}
@@ -721,16 +751,31 @@ export default function ProjectPage() {
           >
             Training Visualizations
           </h3>
-          <div className="mb-8 p-8">
-            <p className="text-sm italic text-muted-foreground">
-              Content will be added here: Progression of NeRF training showing
-              improvement in novel view synthesis quality.
+          <div className="mb-6">
+            <p className="text-sm leading-relaxed text-foreground/80">
+              This figure shows the NeRF’s reconstruction of the first
+              validation view at six training checkpoints. Each panel is the
+              rendered image at a given optimization step, with its
+              corresponding PSNR shown in the title. Early in training, the
+              predictions are blurry and colors are washed out, indicating that
+              the network has only learned coarse structure. As training
+              continues, edges sharpen, fine geometric details of the Lego model
+              appear, and colors become more accurate. The steady increase in
+              PSNR across snapshots reflects this qualitative improvement and
+              confirms that the model is fitting the multi-view data more
+              effectively over time.
             </p>
           </div>
-          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-16 text-center">
-            <p className="text-sm text-muted-foreground">
-              [Placeholder for training progression - multiple epochs showing
-              rendered views]
+          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-8">
+            <Image
+              src="lego_val_6_img.png"
+              alt="Validation render during NeRF training"
+              width={900}
+              height={600}
+              className="mx-auto h-auto w-full max-w-3xl rounded-md border border-border/70"
+            />
+            <p className="mt-4 text-xs uppercase tracking-wide text-muted-foreground">
+              Figure. Validation view sampled mid-training.
             </p>
           </div>
 
@@ -740,16 +785,50 @@ export default function ProjectPage() {
           >
             PSNR Curve
           </h3>
-          <div className="mb-8 p-8">
-            <p className="text-sm italic text-muted-foreground">
-              Content will be added here: Quantitative evaluation showing PSNR
-              improvement during NeRF training.
+          <div className="mb-6">
+            <p className="text-sm leading-relaxed text-foreground/80">
+              These plots show the PSNR over training steps for the NeRF model on
+              the Lego scene. Both training and validation PSNR start around
+              11–12 dB, then rise quickly during the first ~150 steps as the
+              network learns coarse geometry and colors. After that, the curves
+              increase more slowly but steadily, eventually reaching around
+              23–24 dB. The validation curve closely tracks the training curve
+              with no noticeable gap, suggesting the model is fitting the
+              multi-view data well without strong overfitting. Overall, the
+              curves confirm stable optimization and good generalization to the
+              held-out views.
             </p>
           </div>
-          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-16 text-center">
-            <p className="text-sm text-muted-foreground">
-              [Placeholder for PSNR curve plot]
-            </p>
+
+          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-8">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {[
+                {
+                  src: "lego_train_pnsr.png",
+                  caption: "Training PSNR for NeRF lego scene",
+                },
+                {
+                  src: "lego_val_pnsr.png",
+                  caption: "Validation PSNR for NeRF lego scene",
+                },
+              ].map(({ src, caption }) => (
+                <figure
+                  key={src}
+                  className="rounded-md border border-border/70 bg-background p-3 shadow-sm"
+                >
+                  <Image
+                    src={src}
+                    alt={caption}
+                    width={600}
+                    height={400}
+                    className="mx-auto h-auto w-full rounded"
+                  />
+                  <figcaption className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">
+                    {caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
 
           <h3
@@ -758,21 +837,28 @@ export default function ProjectPage() {
           >
             Spherical Rendering Results
           </h3>
-          <div className="mb-8 p-8">
-            <p className="text-sm italic text-muted-foreground">
-              Content will be added here: Final results showing 360-degree novel
-              view synthesis from the trained NeRF model.
+          <div className="mb-6">
+            <p className="text-sm leading-relaxed text-foreground/80">
+            Using the trained NeRF, I rendered novel Lego views along the provided c2ws_test camera trajectory to produce a spherical fly-around video of the scene.
             </p>
           </div>
-          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-16 text-center">
-            <p className="text-sm text-muted-foreground">
-              [Placeholder for spherical/360-degree rendering results or video
-              frames]
+          <div className="my-8 rounded-md border border-dashed border-border/60 bg-muted/20 p-8 text-center">
+            <video
+              src="lego_nerf.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="mx-auto w-full max-w-3xl rounded-md border border-border/70"
+            />
+            <p className="mt-4 text-xs uppercase tracking-wide text-muted-foreground">
+              Figure. Autoplaying spherical render from the trained NeRF on the
+              Lego scene.
             </p>
           </div>
         </section>
 
-        {/* Part 2.6: Training with Your Own Data */}
+        {/* Part 2.6: Training with Your Own Data
         <section id="part26" className="mb-16">
           <h2 className="mb-8 border-b border-border pb-3 text-3xl font-bold text-foreground">
             Part 2.6: Training with Your Own Data
@@ -844,7 +930,7 @@ export default function ProjectPage() {
               [Placeholder for grid of intermediate render results]
             </p>
           </div>
-        </section>
+        </section> */}
       </main>
     </div>
   )

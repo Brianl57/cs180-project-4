@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production'
-const repo = 'cs180-project-3'
+const repo = 'cs180-project-4'
 
 
 const nextConfig = {
